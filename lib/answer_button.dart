@@ -26,7 +26,7 @@ class AnswerButton extends StatelessWidget {
         style: const TextStyle(
           fontStyle: FontStyle.normal,
           color: Color.fromARGB(255, 255, 255, 255),
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),
