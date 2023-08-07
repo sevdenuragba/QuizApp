@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_summary.dart';
 
@@ -10,23 +11,25 @@ class ResultsScreen extends StatelessWidget {
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
 
-    for (var i = 0 ; i < chosenAnswers.length; i++){
-      summary.add(
-        {
+    for (var i = 0; i < chosenAnswers.length; i++) {
+      summary.add({
         'question_index': i,
         'question': questions[i].text,
         'correct_answer': questions[i].answers[0],
         'user_answer': chosenAnswers[i]
-        }
-      );
-      }
-      return summary;
+      });
     }
+    return summary;
+  }
 
   @override
   Widget build(context) {
     final summaryData = getSummaryData();
-    
+    final numTotalQuestions = questions.length;
+    final numCorrectQuestions = summaryData.where((data) {
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
+
     return Center(
       child: SizedBox(
         width: double.infinity,
@@ -35,7 +38,17 @@ class ResultsScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('You answerd x out of y questions correctly'),
+              Center(
+                child: Text(
+                  'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly.',
+                  style:  GoogleFonts.lato(
+                fontStyle: FontStyle.normal,
+                color: const Color.fromARGB(176, 1, 0, 2),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -43,9 +56,18 @@ class ResultsScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              TextButton(
-                onPressed: () {},
-                child: const Text('Restart quiz'),
+              TextButton.icon( onPressed: (){},
+            icon: const Icon(Icons.restart_alt_rounded,
+                color: Color.fromARGB(255, 255, 255, 255),
+                ),
+            label:  Text('Restart quiz', style: GoogleFonts.lato(
+              fontStyle: FontStyle.normal,
+              color: const Color.fromARGB(255, 255, 255, 255),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            ),
+            
               ),
             ],
           ),
