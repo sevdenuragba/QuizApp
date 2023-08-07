@@ -11,9 +11,11 @@ class QuestionsSummary extends StatelessWidget {
       height: 300,
       child: SingleChildScrollView(
         child: Column(
+          
           children: summaryData.map(
             (data) {
               return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     alignment: Alignment.center,
@@ -32,6 +34,7 @@ class QuestionsSummary extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 10),
                         Text(data['question'] as String,
                             textAlign: TextAlign.left),
                         const SizedBox(
@@ -41,6 +44,7 @@ class QuestionsSummary extends StatelessWidget {
                             textAlign: TextAlign.left),
                         Text(data['correct_answer'] as String,
                             textAlign: TextAlign.left),
+                            const SizedBox(height: 10)
                       ],
                     ),
                   ),
